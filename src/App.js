@@ -1,18 +1,14 @@
 import React from "react";
 import Login from "./Login/Login";
-<<<<<<< HEAD
+import SignUp from "./SignUp/SignUp";
 import styled from "styled-components";
+
 function App() {
   return (
     <div className="App">
-      <Login />
+      <SignUp />
     </div>
   );
-=======
-
-function App() {
-  return <Login />;
->>>>>>> f4d66d0fa1f503efebb67d3692e9636500401bb8
 }
 
 export default App;
