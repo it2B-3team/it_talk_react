@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import React from "react";
 
-export const In_Box = styled.div`
+export const Boxx = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
   input {
     padding-left: 15px;
     margin: 5px;
