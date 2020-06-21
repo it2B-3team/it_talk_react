@@ -1,6 +1,20 @@
 import styled from "styled-components";
 import React from "react";
 
+export const Box = styled.div`
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 935px;
+  height: 860px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 5px 0px #3ca0b4;
+  -moz-box-shadow: 5px 5px 5px 0px #3ca0b4;
+  box-shadow: 5px 5px 5px 0px #3ca0b4;
+  display: flex;
+  justify-content: center;
+`;
+
 export const Boxx = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,8 +36,9 @@ export const Form = styled.form`
       box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.5);
     }
   }
-  button {
-    height: 60px;
+  a {
+    text-align: center;
+    padding: 10px 0;
     width: 250px;
     border-radius: 20px;
     border: none;

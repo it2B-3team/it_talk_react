@@ -14,6 +14,19 @@ export const ChatWrap = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
+export const Box = styled.div`
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 935px;
+  height: 860px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 5px 0px #3ca0b4;
+  -moz-box-shadow: 5px 5px 5px 0px #3ca0b4;
+  box-shadow: 5px 5px 5px 0px #3ca0b4;
+  display: flex;
+  justify-content: center;
+`;
 export const Footer = styled.textarea`
   height: 5%;
   width: 80%;

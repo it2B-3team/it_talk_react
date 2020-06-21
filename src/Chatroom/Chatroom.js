@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Footer, LeftChat, RightChat, ChatBox, ChatWrap, Image } from "./Style";
+import { Box, Footer, LeftChat, RightChat, ChatBox, ChatWrap, Image } from "./Style";
 
 const Chat = () => {
   const users = [
@@ -41,28 +41,30 @@ const Chat = () => {
   };
 
   return (
-    <ChatWrap>
-      <ChatBox>
-        {chats.map((chat) =>
-          chat.user.id == 1 ? (
-            <LeftChat>
-              <div>
-                <Image src={chat.user.img} alt="" />
-                <span>{chat.message}</span>
-              </div>
-            </LeftChat>
-          ) : (
-            <RightChat>
-              <div>
-                <Image src={chat.user.img} alt="" />
-                <span>{chat.message}</span>
-              </div>
-            </RightChat>
-          )
-        )}
-      </ChatBox>
-      <Footer onKeyPress={onSubmit} value={message} onChange={onChangeMessage}></Footer>
-    </ChatWrap>
+    <Box>
+      <ChatWrap>
+        <ChatBox>
+          {chats.map((chat) =>
+            chat.user.id == 1 ? (
+              <LeftChat>
+                <div>
+                  <Image src={chat.user.img} alt="" />
+                  <span>{chat.message}</span>
+                </div>
+              </LeftChat>
+            ) : (
+              <RightChat>
+                <div>
+                  <Image src={chat.user.img} alt="" />
+                  <span>{chat.message}</span>
+                </div>
+              </RightChat>
+            )
+          )}
+        </ChatBox>
+        <Footer onKeyPress={onSubmit} value={message} onChange={onChangeMessage}></Footer>
+      </ChatWrap>
+    </Box>
   );
 };
 
