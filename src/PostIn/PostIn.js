@@ -14,7 +14,7 @@ import {
   Title,
   Comments,
   PostMenu,
-  Plus,
+  CommentUp,
   PostBar,
   Plan,
 } from "./Style";
@@ -39,19 +39,26 @@ const PostIn = () => {
       content:
         "과제 회의 언제할깡 내일, 모레 중에 언제가 좋아? 배고파 마라탕 먹자 고양이 카페 가자",
     },
-    { id: 3, c: "", t: "", h: "", d: "", s: "" },
-    { id: 4, c: "", t: "", h: "", d: "", s: "" },
-    { id: 5, c: "", t: "", h: "", d: "", s: "" },
-    { id: 6, c: "", t: "", h: "", d: "", s: "" },
-    { id: 7, c: "", t: "", h: "", d: "", s: "" },
-    { id: 8, c: "", t: "", h: "", d: "", s: "" },
-    { id: 9, c: "", t: "", h: "", d: "", s: "" },
   ];
 
   let comments = [
     { id: 1, name: "전혜성", content: "내일 어때", day: "06.01.17:00" },
     { id: 2, name: "구은주", content: "좋앙", day: "06.01.17:30" },
-    { id: 3, name: "ㅁㄴㅇ", content: "ㅁㄴㅇㅁㄴㅇ", day: "06.01.18:00" },
+    {
+      id: 3,
+      name: "전혜성",
+      content: "상록수에서 만날까?",
+      day: "06.01.18:00",
+    },
+    { id: 4, name: "전혜성", content: "중앙에서 만날까?", day: "06.01.18:01" },
+    {
+      id: 5,
+      name: "구은주",
+      content: "중앙에서 마라탕 먹자",
+      day: "06.01.18:20",
+    },
+    { id: 6, name: "전혜성", content: "좋아 꿔바로우까지", day: "06.01.18:23" },
+    { id: 7, name: "구은주", content: "ㅇㅋㅇㅋ", day: "06.01.18:25" },
   ];
 
   return (
@@ -74,10 +81,10 @@ const PostIn = () => {
                   <Td width="250">파일</Td>
                 </Tr>
                 <Tr>
-                  <Td width="600" height="350">
+                  <Td width="600" height="330">
                     {posts[1].content}
                   </Td>
-                  <Td width="200" height="350"></Td>
+                  <Td width="200" height="330"></Td>
                 </Tr>
               </tbody>
             </Table>
@@ -91,7 +98,13 @@ const PostIn = () => {
                 );
               })}
             </Comments>
-            <Plus>+</Plus>
+            <CommentUp>
+              <input
+                type="text"
+                name=""
+                placeholder="댓글을 입력하세요."
+              ></input>
+            </CommentUp>
           </div>
         </TT>
       </Boxx>
