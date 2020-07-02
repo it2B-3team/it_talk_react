@@ -11,6 +11,7 @@ import PostUp from "./PostUp/PostUp";
 import Chat from "./Chat/Chat";
 import styled from "styled-components";
 import Axios from "axios";
+import { Boxx } from "./Group/Style";
 
 export const Box = styled.div`
   margin: 0 auto;
@@ -27,22 +28,8 @@ export const Box = styled.div`
   justify-content: center;
 `;
 function App() {
-  Axios({
-    method: "post",
-    url: "http://localhost:3002/signUp",
-    params: {
-      email: "gptjd1297@gmail.com",
-      password: "star5454",
-      username: "hyeseong",
-      tel: "010-9406-4167",
-    },
-    json: true,
-  })
-    .then((response) => console.log(response))
-    .catch((err) => console.log(err));
   return (
     <div className="App">
-<<<<<<< HEAD
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
@@ -51,11 +38,11 @@ function App() {
           <Route path="/Chatroom" component={Chatroom} />
           <Route path="/Group" component={Group} />
           <Route path="/GroupIn" component={GroupIn} />
+          <Route path="/TotalPost" component={TotalPost} />
+          <Route path="/PostIn" component={PostIn} />
+          <Route path="/PostUp" component={PostUp} />
         </Switch>
       </Router>
-=======
-      <PostUp />
->>>>>>> 4e4818f81f6ad31e9d5404b7c70fc2a376a7628f
     </div>
   );
 }

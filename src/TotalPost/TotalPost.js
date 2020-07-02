@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Boxx,
@@ -18,7 +19,7 @@ import {
   Plan,
 } from "./Style";
 
-const TotalPost = () => {
+const TotalPost = (props) => {
   let posts = [
     {
       id: 1,
@@ -45,11 +46,21 @@ const TotalPost = () => {
     { id: 9, c: "", t: "", h: "", d: "", s: "" },
   ];
 
+  const init = () => {
+    let auth = localStorage.getItem("loggedIn");
+    if (auth === "false") {
+      props.history.push("/");
+    }
+  };
+
+  init();
   return (
     <Box>
       <Boxx>
         <Menu>
-          <Back>뒤로</Back>
+          <Back>
+            <Link to="GroupIn">뒤로</Link>
+          </Back>
           <Report>공지사항 | 캡스톤 디자인 프로젝트 개발하기</Report>
         </Menu>
         <TT>
@@ -69,7 +80,7 @@ const TotalPost = () => {
                     <Tr>
                       <td>{post.id}</td>
                       <td>{post.c}</td>
-                      <td>{post.t}</td>
+                      <Link to="PostIn">{post.t}</Link>
                       <td>{post.h}</td>
                       <td>{post.d}</td>
                       <td>{post.s}</td>
@@ -78,7 +89,9 @@ const TotalPost = () => {
                 })}
               </tbody>
             </Table>
-            <Plus>+</Plus>
+            <Plus>
+              <Link to="PostUp">+</Link>
+            </Plus>
           </div>
         </TT>
       </Boxx>

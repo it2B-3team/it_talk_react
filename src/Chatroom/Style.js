@@ -54,20 +54,3 @@ export const ChatBox = styled.div`
     overflow: hidden;
   }
 `;
-export const LeftChat = styled.div`
-  width: 100%;
-  display: flex;
-  img {
-    float: left;
-  }
-`;
-export const RightChat = styled.div`
-  width: 100%;
-  display: flex;
-  img {
-    float: right;
-  }
-  div {
-    margin: 0 0 0 auto;
-  }
-`;

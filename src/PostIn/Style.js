@@ -68,7 +68,8 @@ export const Back = styled.div`
   display: flex;
   width: 60px;
   height: 40px;
-  margin-right: 20px;
+  padding-right: 10px;
+  margin-right: 10px;
   border-right: 1px solid white;
   font-weight: bold;
   line-height: 40px;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Boxx,
@@ -16,12 +17,22 @@ import {
   Plan,
 } from "./Style";
 
-const PostUp = () => {
+const PostUp = (props) => {
+  const init = () => {
+    let auth = localStorage.getItem("loggedIn");
+    if (auth === "false") {
+      props.history.push("/");
+    }
+  };
+
+  init();
   return (
     <Box>
       <Boxx>
         <Menu>
-          <Back>뒤로</Back>
+          <Back>
+            <Link to="TotalPost">뒤로</Link>
+          </Back>
           <Report>공지사항 | 캡스톤 디자인 프로젝트 개발하기</Report>
         </Menu>
         <TT>
@@ -35,11 +46,7 @@ const PostUp = () => {
                 </Tr>
                 <Tr>
                   <Td>
-                    <input
-                      type="text"
-                      name="writer"
-                      placeholder="작성자"
-                    ></input>
+                    <input type="text" name="writer" placeholder="작성자"></input>
                   </Td>
                 </Tr>
                 <Tr>

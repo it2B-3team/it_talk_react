@@ -1,62 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Box, Boxx, Menu, Icon, Room } from "./Style";
+import { Box, Boxx, Icon, Room } from "./Style";
+import Menu from "../contents/menu";
+import Axios from "axios";
 
-const Group = () => {
-  let rooms = [
-    { id: 1, name: "it 응용보안과 그룹" },
-    { id: 2, name: "캡스톤 디자인 그룹" },
-    { id: 3, name: "전구 그룹" },
-    { id: 4, name: "" },
-    { id: 5, name: "" },
-    { id: 6, name: "" },
-    { id: 7, name: "" },
-  ];
+const Group = (props) => {
+  const [groups, setGroups] = useState([]);
+
+  const [user_id, setUser_id] = useState(localStorage.getItem("id"));
+
+  const group_request = async () => {
+    await Axios({
+      method: "post",
+      url: "http://localhost:3002/groups",
+      params: {
+        user_id,
+      },
+      json: true,
+    })
+      .then((response) => {
+        setGroups(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    group_request();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const init = () => {
+    let auth = localStorage.getItem("loggedIn");
+    if (auth === "false") {
+      props.history.push("/");
+    }
+  };
+
+  init();
 
   return (
     <Box>
       <Boxx>
-        <Menu>
-          <Icon>
-            <Link to="Chat">
-              <img
-                src="./images/그룹페이지-icon-1.gif"
-                width="90"
-                height="90"
-                alt=""
-                srcset=""
-              />
-            </Link>
-          </Icon>
-          <Icon>
-            <img
-              src="./images/그룹페이지-icon-2.gif"
-              width="90"
-              height="90"
-              alt=""
-              srcset=""
-            />
-          </Icon>
-          <Icon>
-            <img
-              src="./images/그룹페이지-icon-3.gif"
-              width="90"
-              height="90"
-              alt=""
-              srcset=""
-            />
-          </Icon>
-          <Icon>
-            <img
-              src="./images/그룹페이지-icon-4.jpg"
-              width="90"
-              height="90"
-              alt=""
-              srcset=""
-            />
-          </Icon>
-        </Menu>
-        {rooms.map((room) => {
+        <Menu></Menu>
+        {groups.map((room) => {
           return (
             <Link to="/GroupIn">
               <Room>{room.name}</Room>

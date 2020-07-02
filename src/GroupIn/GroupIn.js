@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Boxx,
@@ -16,7 +17,7 @@ import {
   Plan,
 } from "./Style";
 
-const GroupIn = () => {
+const GroupIn = (props) => {
   let posts = [
     { id: 1, name: "어쩌구저쩌구" },
     { id: 2, name: "디자인하기" },
@@ -33,14 +34,27 @@ const GroupIn = () => {
     { id: 13, day: "토", memo: "" },
   ];
 
+  const init = () => {
+    let auth = localStorage.getItem("loggedIn");
+    if (auth === "false") {
+      props.history.push("/");
+    }
+  };
+
+  init();
+
   return (
     <Box>
       <Boxx>
         <Menu>
-          <Back>뒤로</Back>
+          <Link to="Group">
+            <Back>뒤로</Back>
+          </Link>
           <Report>공지사항 | 캡스톤 디자인 프로젝트 개발하기</Report>
         </Menu>
-        <AllPost>+ 게시글 전체보기</AllPost>
+        <AllPost>
+          <Link to="/TotalPost">+ 게시글 전체보기</Link>
+        </AllPost>
         <Boxxx>
           {posts.map((post) => {
             return <Post>{post.name}</Post>;
@@ -49,7 +63,7 @@ const GroupIn = () => {
         <Boxxxx>
           <DayBar>
             <Day>2020-06</Day>
-            <Plus> + </Plus>
+            <Plus>+</Plus>
           </DayBar>
           <PlanBar>
             {plans.map((plan) => {

@@ -55,6 +55,12 @@ export const Tr = styled.tr`
   text-align: center;
   height: 50px;
   font-size: 17px;
+  a {
+    display: table-cell;
+    color: black;
+    border-bottom: 3px solid #f2f2f2;
+    line-height: 50px;
+  }
   td {
     border-bottom: 3px solid #f2f2f2;
   }
@@ -114,6 +120,9 @@ export const Icon = styled.div`
 `;
 
 export const Plus = styled.div`
+  a {
+    color: black;
+  }
   display: flex;
   margin: 0 auto;
   width: 50px;

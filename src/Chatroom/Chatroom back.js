@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Footer, ChatBox, ChatWrap, Image } from "./Style";
+import { Box, Footer, LeftChat, RightChat, ChatBox, ChatWrap, Image } from "./Style";
 import Axios from "axios";
 import io from "socket.io-client";
 
@@ -9,6 +9,7 @@ const Chat = (props) => {
   const [user_id, setUser_id] = useState(localStorage.getItem("id")); // 내 id number
   const [message, setMessage] = useState(""); // input 용
 
+  const [chattings, setChattings] = useState([{}]); // 채팅들
   const [loading, setLoading] = useState(false);
 
   const props_data = props.location.state; //내 id 상대 id 구하기
@@ -17,7 +18,10 @@ const Chat = (props) => {
   const my_id = Number(props_data.my_id); //내 id
   const your_id = Number(props_data.your_id); //상대 id
 
-  const [me, setMe] = useState();
+  const [me, setMe] = useState({}); //나
+  const [you, setYou] = useState({}); //상대
+
+  let default_chat;
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value);
@@ -31,7 +35,6 @@ const Chat = (props) => {
   };
 
   const onSubmit = async (e) => {
-    let scroll = document.getElementById("scrollElement");
     if (e.charCode === 13) {
       Axios({
         method: "post",
@@ -39,17 +42,17 @@ const Chat = (props) => {
         url: "http://localhost:3002/chat_message",
       });
       socket.emit("send_msg", {
-        received_chattings: { message, user: my_id },
+        received_chattings: [...chattings, { message, user: my_id }],
         room,
-        me,
+        received_id: my_id,
       });
       setMessage("");
+      let scroll = document.getElementById("scrollElement");
       scroll.scrollTop = scroll.scrollHeight;
     }
   };
 
   const chat_request = (room_id) => {
-    let scroll = document.getElementById("scrollElement");
     Axios({
       method: "post",
       params: { my_id, your_id, room_id },
@@ -57,40 +60,20 @@ const Chat = (props) => {
     }).then(({ data }) => {
       const user_data = data.users;
       const message_data = data.messages;
-      if (data)
-        data.messages.map((message) => {
-          let user1;
-          let user2;
-
-          if (Number(my_id) === Number(user_data[0].userid)) {
-            user1 = user_data[0];
-            user2 = user_data[1];
-          } else {
-            user1 = user_data[1];
-            user2 = user_data[0];
-          }
-
-          const chat = document.createElement("div");
-          let chat_message = document.createElement("div");
-          const chat_img = document.createElement("img");
-          chat_message.innerHTML = message.message;
-
-          if (Number(message.user) === my_id) {
-            chat_img.src = user1.img;
-            chat.setAttribute("id", "rightChat");
-            chat.append(chat_message);
-            chat.append(chat_img);
-            scroll.append(chat);
-          } else if (Number(message.user) === your_id) {
-            chat_img.src = user2.img;
-            chat.setAttribute("id", "leftChat");
-            chat.append(chat_img);
-            chat.append(chat_message);
-            scroll.append(chat);
-          }
-        });
+      if (data) {
+        if (my_id === Number(user_data[0].userid)) {
+          setMe(user_data[0]);
+          setYou(user_data[1]);
+        } else if (my_id === Number(user_data[1].userid)) {
+          setMe(user_data[1]);
+          setYou(user_data[0]);
+        }
+        if (data) {
+          setChattings(data.messages);
+          default_chat = chattings;
+        }
+      }
       setLoading(true);
-      scroll.scrollTop = scroll.scrollHeight;
     });
   };
 
@@ -108,50 +91,39 @@ const Chat = (props) => {
 
   useEffect(() => {
     socket.emit("room_join", room);
-    room_request();
-
-    Axios({
-      method: "post",
-      params: { my_id },
-      url: "http://localhost:3002/me",
-    }).then(({ data }) => {
-      setMe(data[0]);
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  socket.on("receive_msg", ({ received_chattings: { message, user }, me }) => {
+  socket.on("receive_msg", ({ received_chattings, room, received_id }) => {
+    setChattings(received_chattings);
     let scroll = document.getElementById("scrollElement");
-    scroll.scrollTop = scroll.scrollHeight;
-
-    const chat = document.createElement("div");
-    const chat_message = document.createElement("div");
-    const chat_img = document.createElement("img");
-    chat_message.innerHTML = message;
-    chat_img.src = me.img;
-    if (Number(me.userid) === my_id) {
-      chat.setAttribute("id", "rightChat");
-      chat.append(chat_message);
-      chat.append(chat_img);
-    } else {
-      chat.setAttribute("id", "leftChat");
-      chat.append(chat_img);
-      chat.append(chat_message);
-    }
-
-    scroll.append(chat);
     scroll.scrollTop = scroll.scrollHeight;
   });
 
   useEffect(() => {
     init();
+    room_request();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   return (
     <Box>
       <ChatWrap>
-        <ChatBox id="scrollElement"></ChatBox>
+        <ChatBox id="scrollElement">
+          {chattings.map((chat) =>
+            Number(chat.user) === Number(me.userid) ? (
+              <RightChat>
+                <div>{chat.message}</div>
+                <Image src={me.img}></Image>
+              </RightChat>
+            ) : (
+              <LeftChat>
+                <Image src={you.img}></Image>
+                <div>{chat.message}</div>
+              </LeftChat>
+            )
+          )}
+        </ChatBox>
         <Footer onKeyPress={onSubmit} value={message} onChange={onChangeMessage}></Footer>
       </ChatWrap>
     </Box>

@@ -62,6 +62,9 @@ export const Report = styled.div`
 `;
 
 export const AllPost = styled.div`
+  a {
+    color: black;
+  }
   display: flex;
   width: 880px;
   height: 40px;

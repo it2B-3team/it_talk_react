@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Boxx,
@@ -19,7 +20,7 @@ import {
   Plan,
 } from "./Style";
 
-const PostIn = () => {
+const PostIn = (props) => {
   let posts = [
     {
       id: 1,
@@ -54,11 +55,21 @@ const PostIn = () => {
     { id: 3, name: "ㅁㄴㅇ", content: "ㅁㄴㅇㅁㄴㅇ", day: "06.01.18:00" },
   ];
 
+  const init = () => {
+    let auth = localStorage.getItem("loggedIn");
+    if (auth === "false") {
+      props.history.push("/");
+    }
+  };
+
+  init();
   return (
     <Box>
       <Boxx>
         <Menu>
-          <Back>뒤로</Back>
+          <Link to="TotalPost">
+            <Back>뒤로</Back>
+          </Link>
           <Title>
             <div>{posts[1].h}</div>
             <div>{posts[1].t}</div>
