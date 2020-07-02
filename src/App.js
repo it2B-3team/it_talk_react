@@ -5,6 +5,9 @@ import SignUp from "./SignUp/SignUp";
 import Chatroom from "./Chatroom/Chatroom";
 import Group from "./Group/Group";
 import GroupIn from "./GroupIn/GroupIn";
+import TotalPost from "./TotalPost/TotalPost";
+import PostIn from "./PostIn/PostIn";
+import PostUp from "./PostUp/PostUp";
 import Chat from "./Chat/Chat";
 import styled from "styled-components";
 import Axios from "axios";
@@ -39,6 +42,7 @@ function App() {
     .catch((err) => console.log(err));
   return (
     <div className="App">
+<<<<<<< HEAD
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
@@ -49,6 +53,9 @@ function App() {
           <Route path="/GroupIn" component={GroupIn} />
         </Switch>
       </Router>
+=======
+      <PostUp />
+>>>>>>> 4e4818f81f6ad31e9d5404b7c70fc2a376a7628f
     </div>
   );
 }
