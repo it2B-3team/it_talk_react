@@ -30,6 +30,7 @@ export const Box = styled.div`
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
@@ -43,6 +44,9 @@ function App() {
           <Route path="/PostUp" component={PostUp} />
         </Switch>
       </Router>
+=======
+      <PostIn />
+>>>>>>> 94207a353481b45dd460d02e42472bc2137625ed
     </div>
   );
 }

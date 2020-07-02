@@ -91,6 +91,10 @@ export const Title = styled.div`
 
 export const Comments = styled.div`
   flex-direction: column;
+  overflow: auto;
+  width: 854px;
+  height: 295px;
+  margin-bottom: 25px;
   div {
     overflow: hidden;
     width: 100%;
@@ -99,10 +103,11 @@ export const Comments = styled.div`
     border-bottom: 3px solid #f2f2f2;
     span {
       &:first-child {
-        margin-right: 30px;
+        margin: 0 30px 0 10px;
       }
       &:last-child {
         float: right;
+        margin-right: 10px;
       }
     }
   }
@@ -136,14 +141,19 @@ export const Icon = styled.div`
   }
 `;
 
-export const Plus = styled.div`
+export const CommentUp = styled.div`
   display: flex;
   margin: 0 auto;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
   justify-content: center;
-  font-size: 40px;
+  input {
+    width: 837px;
+    height: 50px;
+    padding-left: 15px;
+    font-size: 17px;
+    background-color: #f2f2f2;
+    border: 0px;
+    border-radius: 10px;
+  }
 `;
 
 export const PostBar = styled.div`
